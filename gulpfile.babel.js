@@ -17,25 +17,6 @@ var generic = JSON.parse(fs.readFileSync(`./config/${environment}.json`));
 var specific = JSON.parse(fs.readFileSync(`./config/${target}.json`));
 var context = Object.assign({}, generic, specific);
 
-var manifest = {
-  dev: {
-    "background": {
-      "scripts": [
-        "scripts/livereload.js",
-        "scripts/background.js"
-      ]
-    }
-  },
-
-  firefox: {
-    "applications": {
-      "gecko": {
-        "id": "my-app-id@mozilla.org"
-      }
-    }
-  }
-}
-
 // Tasks
 gulp.task('clean', () => {
   return pipe(`./build/${target}`, $.clean())
@@ -55,7 +36,7 @@ gulp.task('watch', ['build'], () => {
 
 gulp.task('default', ['build']);
 
-gulp.task('ext', ['manifest', 'js'], () => {
+gulp.task('ext', ['js'], () => {
   return mergeAll(target)
 });
 
@@ -77,23 +58,6 @@ gulp.task('styles', () => {
     }).on('error', $.sass.logError))
     .pipe(gulp.dest(`build/${target}/styles`));
 });
-
-gulp.task("manifest", () => {
-  return gulp.src('./manifest.json')
-    .pipe(gulpif(!production, $.mergeJson({
-      fileName: "manifest.json",
-      jsonSpace: " ".repeat(4),
-      endObj: manifest.dev
-    })))
-    .pipe(gulpif(target === "firefox", $.mergeJson({
-      fileName: "manifest.json",
-      jsonSpace: " ".repeat(4),
-      endObj: manifest.firefox
-    })))
-    .pipe(gulp.dest(`./build/${target}`))
-});
-
-
 
 // -----------------
 // DIST
@@ -127,11 +91,8 @@ function mergeAll(dest) {
 
 function buildJS(target) {
   const files = [
-    'background.js',
-    'contentscript.js',
     'options.js',
     'popup.js',
-    'livereload.js'
   ]
 
   let tasks = files.map( file => {

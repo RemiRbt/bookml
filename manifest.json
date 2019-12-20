@@ -1,18 +1,13 @@
 {
-  "name": "__MSG_appName__",
+  "name": "Bookmarklet Extension",
   "version": "0.0.1",
   "manifest_version": 2,
-  "description": "__MSG_appDescription__",
+  "description": "Bookmarklets management extension.",
   "icons": {
     "16": "icons/icon-16.png",
     "128": "icons/icon-128.png"
   },
   "default_locale": "en",
-  "background": {
-    "scripts": [
-      "scripts/background.js"
-    ]
-  },
   "permissions": [
     "tabs",
     "storage",
@@ -28,9 +23,6 @@
         "http://*/*",
         "https://*/*"
       ],
-      "js": [
-        "scripts/contentscript.js"
-      ],
       "run_at": "document_end",
       "all_frames": false
     }
@@ -40,7 +32,7 @@
       "19": "icons/icon-19.png",
       "38": "icons/icon-38.png"
     },
-    "default_title": "Extension Boilerplate",
+    "default_title": "Bookmarklet Extension",
     "default_popup": "popup.html"
   }
 }
