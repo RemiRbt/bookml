@@ -2,48 +2,69 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <link href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" rel="stylesheet">
   <link href="styles/options.css" rel="stylesheet">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Options & Settings</title>
 </head>
-<body class="wrap">
-  <div class="grid">
-    <div class="unit whole center-on-mobiles">
-      <div class="heading">
-        <h1>Extension Boilerplate</h1>
-        <p class="lead">A foundation for creating cross-browser extensions</p>  
-      </div>
+<h1>BookML Extension</h1>
+
+<table class="table-alternating">
+  <thead>
+  <tr>
+    <th>Nom</th>
+    <th>Url</th>
+  </tr>
+  </thead>
+  <tbody class="list">
+  </tbody>
+</table>
+
+<div class="form-group">
+  <label for="add-title">Name</label>
+  <input class="new-bookml-title" type="text" id="add-title">
+</div>
+<div class="form-group">
+  <label for="add-url">Url</label>
+  <textarea class="new-bookml-url" id="add-url"></textarea>
+</div>
+<div class="form-group">
+  <button class="add-bookml">Add</button>
+</div>
+
+<div class="row">
+  <label class="paper-btn margin" for="modal-import">Import</label>
+  <label class="paper-btn margin" for="modal-export">Export</label>
+</div>
+
+<input class="modal-state" id="modal-import" type="checkbox">
+<div class="modal">
+  <label class="modal-bg" for="modal-import"></label>
+  <div class="modal-body">
+    <label class="btn-close" for="modal-import">X</label>
+    <h4 class="modal-title">Import configuration</h4>
+    <div class="form-group">
+      <textarea class="textarea-pre-display" placeholder="Paste config here" cols="60" rows="10"></textarea>
     </div>
+    <label for="modal-import" class="[ paper-btn ] [ import-bookml ]">Ok</label>
   </div>
-  
-  <section class="content">
-    <div class="grid">
-      <div class="unit whole center-on-mobiles">
-        <div class="option">
-          <h5>Bookmarklets :</h5>
-          <ul class="list">
-          </ul>
-          <input class="new-bookml-title" type="text">
-          <textarea class="new-bookml-url"></textarea>
-          <input type="button" class="add-bookml" value="Add">
-        </div>
-      </div>
-      <input type="button" class="import-bookml" value="Import">
-      <input type="button" class="export-bookml" value="Export">
-    </div>  
-  </section>
-  
-  
-  <footer class="main-footer">
-    <div class="grid">
-      <div class="unit whole center-on-mobiles">
-        <p class="text-center text-muted">
-          &copy; Extension Boilerplate
-        </p>
-      </div>
-    </div>
-  
-  </footer>
-  <script src="scripts/options.js"></script>
+</div>
+
+<input class="modal-state" id="modal-export" type="checkbox">
+<div class="modal">
+  <label class="modal-bg" for="modal-export"></label>
+  <div class="modal-body">
+    <label class="btn-close" for="modal-export">X</label>
+    <h4 class="modal-title">Export configuration</h4>
+    <pre><code class="export-config"></code></pre>
+    <label for="modal-export" class="[ paper-btn ] [ export-bookml ]">Ok</label>
+  </div>
+</div>
+
+<footer class="row flex-center">
+  <p>🏗 with <a href="https://github.com/EmailThis/extension-boilerplate">extension-boilerplate</a> and 🎨 with <a
+    href="https://www.getpapercss.com/docs/layout/flexbox/">PaperCSS</a></p>
+</footer>
+<script src="scripts/options.js"></script>
 </body>
 </html>

@@ -17,10 +17,10 @@ optionsLink.addEventListener("click", function(e) {
 var renderList = (list) => {
   var elListItem = '';
   list.forEach((value) => {
-    elListItem += `<li class="list-item" data-url="${value.url}">${value.title}</li>`
+    elListItem += `<button class="[ list-item ] [ btn-small ]" data-url="${value.url}">${value.title}</button>`
   })
-  document.querySelector("ul.list").innerHTML = elListItem;
-  document.querySelector("li.list-item").addEventListener("click", function(e) {
+  document.querySelector(".list").innerHTML = elListItem;
+  document.querySelector(".list-item").addEventListener("click", function(e) {
     var bookMlUrl = e.target.getAttribute('data-url');
     var xhr = new XMLHttpRequest();
     xhr.open('GET', `${bookMlUrl}/raw`);

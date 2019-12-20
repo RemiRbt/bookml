@@ -1,16 +1,15 @@
-import ext from "./utils/ext";
 import storage from "./utils/storage";
 
 var aBookml = [];
 
-storage.get(['bookml'], function(resp) {
+storage.get(['bookml'], function (resp) {
   if (resp.bookml) {
     aBookml = resp.bookml;
     renderList(aBookml);
   }
 });
 
-document.querySelector(".add-bookml").addEventListener("click", function() {
+document.querySelector(".add-bookml").addEventListener("click", function () {
   var title = document.querySelector(".new-bookml-title").value.trim();
   var url = document.querySelector(".new-bookml-url").value.trim();
   if (title !== '' && title !== null && title && url !== '' && url !== null && url) {
@@ -21,20 +20,28 @@ document.querySelector(".add-bookml").addEventListener("click", function() {
   }
 })
 
-document.querySelector(".import-bookml").addEventListener("click", function() {
-  // @todo popin import fichier dans localstorage bookml
+document.querySelector(".import-bookml").addEventListener("click", function () {
+  var newConfig = document.querySelector("textarea.textarea-pre-display").value.trim();
+  var newConfigJson = JSON.parse(newConfig);
+  if (newConfigJson) {
+    aBookml = newConfigJson;
+    storage.set({bookml: aBookml});
+    renderList(aBookml);
+  }
 })
 
-document.querySelector(".export-bookml").addEventListener("click", function() {
-  // @todo popin export dans localstorage bookml dans fichier
-  console.log(JSON.stringify(aBookml));
+document.querySelector("#modal-export").addEventListener("click", function () {
+  document.querySelector("code.export-config").innerHTML = JSON.stringify(aBookml);
 })
 
 var renderList = (list) => {
   console.log(list);
   var elListItem = '';
   list.forEach((value) => {
-    elListItem += `<li>${value.title}: ${value.url}</li>`
+    elListItem += `<tr>
+      <td>${value.title}</td>
+      <td>${value.url}</td>
+    </tr>`
   })
-  document.querySelector("ul.list").innerHTML = elListItem;
+  document.querySelector("tbody.list").innerHTML = elListItem;
 }
