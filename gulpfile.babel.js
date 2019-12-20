@@ -36,7 +36,7 @@ gulp.task('watch', ['build'], () => {
 
 gulp.task('default', ['build']);
 
-gulp.task('ext', ['js'], () => {
+gulp.task('ext', ['manifest', 'js'], () => {
   return mergeAll(target)
 });
 
@@ -57,6 +57,11 @@ gulp.task('styles', () => {
       includePaths: ['.']
     }).on('error', $.sass.logError))
     .pipe(gulp.dest(`build/${target}/styles`));
+});
+
+gulp.task("manifest", () => {
+  return gulp.src('./manifest.json')
+    .pipe(gulp.dest(`./build/${target}`))
 });
 
 // -----------------
@@ -91,6 +96,7 @@ function mergeAll(dest) {
 
 function buildJS(target) {
   const files = [
+    'contentscript.js',
     'options.js',
     'popup.js',
   ]
